@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TeendokLista.API.Models;
 using TeendokLista.API.Repositories;
@@ -33,6 +34,10 @@ namespace TeendokLista.API
         {
 
             services.AddControllers();
+            //services.AddControllers()
+            //    .AddJsonOptions(x => 
+            //        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
             services.AddDbContext<TeendokContext>(o =>
                 o.UseMySql(Configuration.GetConnectionString("TeendokDB"),
                 ServerVersion.Parse("10.4.21-mariadb")));
