@@ -55,9 +55,10 @@ namespace BasicAuth
             }
 
             var role = await _userService.GetRole(authUsername);
+            var identifier = await _userService.GetIdentifier(authUsername);
 
             var claims = new[] {
-                new Claim(ClaimTypes.Name, authUsername),
+                new Claim(ClaimTypes.Name, identifier),
                 new Claim(ClaimTypes.Authentication, "BasicAuthentication"),
                 new Claim(ClaimTypes.Role, role)
             };

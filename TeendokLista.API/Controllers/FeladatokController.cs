@@ -26,21 +26,21 @@ namespace TeendokLista.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Feladat>>> Getfeladatok()
         {
-            return await _context.feladatok.Where(x => x.Felhasznalo.Felhasznalonev == User.Identity.Name).ToListAsync();
+            return await _context.feladatok.Where(x => x.FelhasznaloId.ToString() == User.Identity.Name).ToListAsync();
         }
 
         // GET: api/Feladatok/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Feladat>> GetFeladat(int id)
         {
-            var feladat = await _context.feladatok.Include(x => x.Felhasznalo).FirstOrDefaultAsync(x => x.Id == id);
+            var feladat = await _context.feladatok.FindAsync(id);
 
             if (feladat == null)
             {
                 return NotFound();
             }
 
-            if (feladat.Felhasznalo.Felhasznalonev != User.Identity.Name)
+            if (feladat.FelhasznaloId.ToString() != User.Identity.Name)
             {
                 return Unauthorized();
             }

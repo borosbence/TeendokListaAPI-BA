@@ -44,15 +44,15 @@ namespace TeendokLista.API.Repositories
             return string.Empty;
         }
 
-        public async Task<int> GetIdentifier(string username)
+        public async Task<string> GetIdentifier(string username)
         {
             var dbUser = await _context.felhasznalok
                 .SingleOrDefaultAsync(x => x.Felhasznalonev.Equals(username));
             if (dbUser != null)
             {
-                return dbUser.Id;
+                return dbUser.Id.ToString();
             }
-            return 0;
+            return null;
         }
     }
 }
