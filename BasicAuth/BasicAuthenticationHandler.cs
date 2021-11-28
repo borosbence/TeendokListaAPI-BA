@@ -48,7 +48,6 @@ namespace BasicAuth
             var authSplit = authBase64.Split(Convert.ToChar(":"), 2);
             var authUsername = authSplit[0];
             var authPassword = authSplit.Length > 1 ? authSplit[1] : throw new Exception("Unable to get password");
-
             var verified = await _userService.Authenticate(authUsername, authPassword);
             if (!verified)
             {
@@ -58,8 +57,8 @@ namespace BasicAuth
             var role = await _userService.GetRole(authUsername);
 
             var claims = new[] {
-                new Claim(ClaimTypes.NameIdentifier, authUsername),
                 new Claim(ClaimTypes.Name, authUsername),
+                new Claim(ClaimTypes.Authentication, "BasicAuthentication"),
                 new Claim(ClaimTypes.Role, role)
             };
 

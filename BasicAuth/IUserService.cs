@@ -10,5 +10,6 @@ namespace BasicAuth
     {
         Task<bool> Authenticate(string username, string password);
         Task<string> GetRole(string username);
+        Task<int> GetIdentifier(string username);
     }
 }

@@ -11,7 +11,7 @@ namespace TeendokLista.API.Controllers
     {
         [HttpGet]
         [Route("Publikus")]
-        [AllowAnonymous]
+        [AllowAnonymous] // Akkor kell, ha Authorize van a controller-en
         public string Public()
         {
             return "Ezt a részt bárki láthatja.";

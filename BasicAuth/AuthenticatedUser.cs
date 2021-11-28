@@ -9,12 +9,11 @@ namespace BasicAuth
 {
     public class AuthenticatedUser : IIdentity
     {
-        public AuthenticatedUser(string authenticationType, bool isAuthenticated, string name, string role)
+        public AuthenticatedUser(string authenticationType, bool isAuthenticated, string name)
         {
             AuthenticationType = authenticationType;
             IsAuthenticated = isAuthenticated;
             Name = name;
-            Role = role;
         }
 
         public string AuthenticationType { get; }
@@ -22,7 +21,5 @@ namespace BasicAuth
         public bool IsAuthenticated { get; }
 
         public string Name { get; }
-
-        public string Role { get; }
     }
 }
