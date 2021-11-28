@@ -53,6 +53,7 @@ namespace TeendokLista.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFeladat(int id, Feladat feladat)
         {
+            AddUser(ref feladat);
             if (id != feladat.Id)
             {
                 return BadRequest();
@@ -84,6 +85,7 @@ namespace TeendokLista.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Feladat>> PostFeladat(Feladat feladat)
         {
+            AddUser(ref feladat);
             _context.feladatok.Add(feladat);
             await _context.SaveChangesAsync();
 
@@ -109,6 +111,11 @@ namespace TeendokLista.API.Controllers
         private bool FeladatExists(int id)
         {
             return _context.feladatok.Any(e => e.Id == id);
+        }
+
+        private void AddUser(ref Feladat feladat)
+        {
+            feladat.FelhasznaloId = Convert.ToInt32(User.Identity.Name);
         }
     }
 }
