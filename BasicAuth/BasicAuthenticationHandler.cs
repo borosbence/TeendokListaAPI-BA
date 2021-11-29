@@ -28,11 +28,10 @@ namespace BasicAuth
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            Response.Headers.Add("WWW-Authenticate", "Basic");
-
             if (!Request.Headers.ContainsKey("Authorization"))
             {
-                return AuthenticateResult.Fail("Authorization header missing.");
+                Response.Headers.Add("WWW-Authenticate", @"Basic realm='Secure Area'");
+                return AuthenticateResult.Fail("Missing Authorization Header");
             }
 
             // Get authorization key
@@ -58,6 +57,8 @@ namespace BasicAuth
             var identifier = await _userService.GetIdentifier(authUsername);
 
             var claims = new[] {
+                // new Claim(ClaimTypes.NameIdentifier, identifier),
+                // new Claim(ClaimTypes.Name, authUsername),
                 new Claim(ClaimTypes.Name, identifier),
                 new Claim(ClaimTypes.Authentication, "BasicAuthentication"),
                 new Claim(ClaimTypes.Role, role)
