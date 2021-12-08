@@ -30,7 +30,7 @@ namespace TeendokLista.API.Models
 
         [ForeignKey(nameof(FelhasznaloId))]
         [InverseProperty(nameof(Models.Felhasznalo.feladatok))]
-        [JsonIgnore]
+        [JsonIgnore] // Json hivatkozás loop kikapcsolására
         public virtual Felhasznalo Felhasznalo { get; set; }
     }
 }

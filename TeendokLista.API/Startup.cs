@@ -41,11 +41,12 @@ namespace TeendokLista.API
                 o.UseMySql(Configuration.GetConnectionString("TeendokDB"),
                 ServerVersion.Parse("10.4.21-mariadb")));
 
-            // configure basic authentication 
+            // Basic authentikáció konfigurálása
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
-            // configure DI for application services
+            // Dependency Injenction konfigurálása
+            // services.AddScoped<IUserService, TesztFelhasznaloRepository>();
             services.AddScoped<IUserService, FelhasznaloRepository>();
 
         }
@@ -61,7 +62,7 @@ namespace TeendokLista.API
             app.UseRouting();
 
             app.UseCors(o => o.AllowAnyOrigin());
-
+            // Hitelesítés bekapcsolása
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -7,11 +7,13 @@ namespace TeendokLista.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // Hitelesítés bekapcsolása a Controller metódusaihoz
     public class TesztController : ControllerBase
     {
         [HttpGet]
         [Route("Publikus")]
-        [AllowAnonymous] // Akkor kell, ha Authorize van a controller-en
+        [Route("Public")]
+        [AllowAnonymous] // Hitelesítés nélkül is elérhető, akkor kell, ha Authorize van a controller-en
         public string Public()
         {
             return "Ezt a részt bárki láthatja.";
@@ -20,7 +22,7 @@ namespace TeendokLista.API.Controllers
         [HttpGet]
         [Route("TopSecret")]
         //[Authorize]
-        [Authorize(Roles = "Adminisztrátor")]
+        [Authorize(Roles = "Adminisztrátor")] // Ezt csak adiminsztátor szerepkörű láthatja
         public string TopSecret()
         {
             return "Ez egy titkos szöveg.";

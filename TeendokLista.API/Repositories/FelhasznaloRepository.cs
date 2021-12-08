@@ -52,7 +52,7 @@ namespace TeendokLista.API.Repositories
             {
                 return dbUser.Id.ToString();
             }
-            return null;
+            return string.Empty;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace TeendokLista.API.Controllers
 
             if (feladat.FelhasznaloId.ToString() != User.Identity.Name)
             {
-                return Unauthorized();
+                return Forbid();
             }
 
             return feladat;
@@ -100,6 +100,10 @@ namespace TeendokLista.API.Controllers
             if (feladat == null)
             {
                 return NotFound();
+            }
+            if (feladat.FelhasznaloId.ToString() != User.Identity.Name)
+            {
+                return Forbid();
             }
 
             _context.feladatok.Remove(feladat);
