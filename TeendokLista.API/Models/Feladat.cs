@@ -22,7 +22,7 @@ namespace TeendokLista.API.Models
         [Required]
         [Column(TypeName = "text")]
         public string Szoveg { get; set; }
-        [MaxLength(6)]
+        // [MaxLength(6)]
         public DateTime Hatarido { get; set; }
         public bool Teljesitve { get; set; }
         [Column(TypeName = "int(11)")]
